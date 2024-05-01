@@ -99,12 +99,13 @@ function TaskListApp() {
       </div>
       </div>
       {tasks.length === 0 ? <EmpltyListView /> : <TaskListView />}
-      {tasks.length > 0 && <TaskSummary completedTasks={tasks.filter((task) => task.completed).length} totalTasks={tasks.length} />}
-      <ResponsiveContainer width="100%" height={300}>
+      {tasks.length > 0 && <div className='summary-container'>
+      <TaskSummary completedTasks={tasks.filter((task) => task.completed).length} totalTasks={tasks.length} />
+        <div className="reachart"><ResponsiveContainer  width="100%" height={300}>
       <PieChart>
         <Pie
-          cx="70%"
-          cy="40%"
+          cx="50%"
+          cy="50%"
           data={data}
           startAngle={0}
           endAngle={360}
@@ -123,7 +124,10 @@ function TaskListApp() {
           align="center"
         />
       </PieChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
+      
+      </div>}
+      
     </div>
   );
 }
