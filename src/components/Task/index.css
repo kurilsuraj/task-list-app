@@ -1,0 +1,67 @@
+.task-completed {
+    background-color: #1b592f;
+    color: white;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.task{
+
+    background-color: white;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.list-cheackbox-container{
+    display: flex;
+    align-items: center;
+}
+
+.delete-icon {
+    height: 40px;
+}
+
+.cheack-input{
+    height: 30px;
+    width: 30px;
+}
+.span-elment {
+    font-weight: bold;
+}
+
+.list-space-between-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.update-button {
+    background-color: #6373a4;
+    color: white;
+    border: none;
+    height: 36px;
+    border-radius: 6px;
+    padding: 7px 15px 7px 15px;
+    align-self: flex-start;
+    cursor: pointer;
+    font-family: "Roboto";
+    font-size: 15px;
+  }
+
+  .select-option {
+    height: 36px;
+    border-radius: 6px;
+    padding: 7px 15px 7px 15px;
+    align-self: flex-start;
+    cursor: pointer;
+    font-family: "Roboto";
+    font-size: 15px;
+    margin-left: 20px;
+  }
+
+  .edit-icon{
+    height: 25px;
+  }

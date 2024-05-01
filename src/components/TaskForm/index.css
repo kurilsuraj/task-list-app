@@ -1,0 +1,18 @@
+.add-button {
+    background-color: #6373a4;
+    color: white;
+    border: none;
+    height: 36px;
+    border-radius: 6px;
+    padding: 7px 15px 7px 15px;
+    align-self: flex-start;
+    cursor: pointer;
+    font-size: 15px;
+  }
+
+  .input-style {
+    height: 36px;
+    border-radius: 6px;
+    border: none;
+  }
+  
