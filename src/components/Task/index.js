@@ -11,7 +11,7 @@ function Task({ users, task, onToggleCompleted, onEditStatus, onAssignTask, onDe
   };
 
   const onEditStatus1 = () => {
-    onEditStatus(task.id, activeStatus);
+    onEditStatus(task.id, activeStatus, task.completed);
   };
 
   const onChangeUser = (event) => {
@@ -55,7 +55,7 @@ function Task({ users, task, onToggleCompleted, onEditStatus, onAssignTask, onDe
   return (<div className='list-cheackbox-container'><input className='cheack-input'
     type="checkbox"
     checked={task.completed}
-    onChange={() => onToggleCompleted(task.id)}
+    onChange={() => onToggleCompleted(task.id, task.completed)}
   />
   <li key={task.id} className={`${task.completed ? 'task-completed' : 'task'}`}>
     <div className='list-space-between-container'>

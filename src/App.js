@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PieChart, Pie, Legend, Cell, ResponsiveContainer } from "recharts"
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import TaskSummary from './components/TaskSummary';
@@ -14,9 +15,11 @@ function TaskListApp() {
     setTasks([...tasks, { id: Date.now(), title, completed: false, assignedTo: null, status: "Yet to Start" }]);
   };
 
-  const handleToggleCompleted = (taskId) => {
+  const handleToggleCompleted = (taskId, status) => {
+    const newStatus = status ? "Yet to Start" : "Completed"
+
     setTasks(
-      tasks.map((task) => (task.id === taskId ? { ...task, completed: !task.completed } : task))
+      tasks.map((task) => (task.id === taskId ? { ...task, completed: !task.completed , status: newStatus} : task))
     );
   };
 
@@ -38,10 +41,11 @@ function TaskListApp() {
     setUser("")
   }
 
-  const onEditStatus = (taskId, status) => {
+  const onEditStatus = (taskId, status, completedStatus) => {
+    const newCompletedValue = status === "Completed" ? true : false
     setTasks(
       tasks.map((task) =>
-        task.id === taskId ? { ...task, status: status } : task
+        task.id === taskId ? { ...task, completed: newCompletedValue, status: status } : task
       )
     );
   }
@@ -61,6 +65,25 @@ function TaskListApp() {
     <TaskList users={users} tasks={tasks} onToggleCompleted={handleToggleCompleted} onAssignTask={handleAssignTask} onEditStatus={onEditStatus} onDeleteTask={onDeleteTask}/>
   )
 
+  const yetToStartCount = tasks.reduce((accumulator, current) => current.status === "Yet to Start" ? accumulator + 1 : accumulator, 0);
+  const startedCount = tasks.reduce((accumulator, current) => current.status === "Started" ? accumulator + 1 : accumulator, 0);
+  const completedCount = tasks.reduce((accumulator, current) => current.status === "Completed" ? accumulator + 1 : accumulator, 0);
+
+  const data = [
+    {
+      count: completedCount,
+      status: "Completed",
+    },
+    {
+      count: startedCount,
+      status: "Started",
+    },
+    {
+      count: yetToStartCount,
+      status: "Yet To Start",
+    },
+  ]
+
   return (
     <div className="task-list-app">
       <div className='header'>
@@ -77,6 +100,30 @@ function TaskListApp() {
       </div>
       {tasks.length === 0 ? <EmpltyListView /> : <TaskListView />}
       {tasks.length > 0 && <TaskSummary completedTasks={tasks.filter((task) => task.completed).length} totalTasks={tasks.length} />}
+      <ResponsiveContainer width="100%" height={300}>
+      <PieChart>
+        <Pie
+          cx="70%"
+          cy="40%"
+          data={data}
+          startAngle={0}
+          endAngle={360}
+          innerRadius="40%"
+          outerRadius="70%"
+          dataKey="count"
+        >
+          <Cell name="Completed" fill="green" />
+          <Cell name="Started" fill="yellow" />
+          <Cell name="Yet to Start" fill="orange" />
+        </Pie>
+        <Legend
+          iconType="circle"
+          layout="vertical"
+          verticalAlign="middle"
+          align="center"
+        />
+      </PieChart>
+    </ResponsiveContainer>
     </div>
   );
 }
